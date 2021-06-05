@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 from store.models import Product
 from .models import CartItem, Cart
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -74,8 +75,8 @@ class CartView(View):
 			tax = (18 * total)/100
 			grand_total = tax + total
 
-		except ObjectNotExist:
-			return redirect('store')
+		except ObjectDoesNotExist:
+			pass
 		return render(request, 'cart.html', {'cart_items':cart_items,'total':total, 'tax':tax,'grand_total':grand_total})
 
 
