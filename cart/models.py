@@ -1,5 +1,5 @@
 from django.db import models
-from store.models import Product
+from store.models import Product, Colors, Sizes
 
 # Create your models here.
 class Cart(models.Model):
@@ -14,6 +14,8 @@ class CartItem(models.Model):
 	product = models.ForeignKey(Product, on_delete= models.CASCADE)
 	cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
 	quantity = models.IntegerField()
+	color = models.ForeignKey(Colors, on_delete= models.CASCADE, blank=True, null=True)
+	size = models.ForeignKey(Sizes, on_delete=models.CASCADE,null=True, blank=True, related_name='cart_item_size')
 	is_active = models.BooleanField(default=True)
 
 	def subtotal(self):
