@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class CustomUserManager(BaseUserManager):
-	def create_user(self, first_name, last_name, username, email, password=None):
+	def create_user(self, first_name, last_name, username, email, password=None, *args, **kwargs):
 		if not email:
 			raise ValueError('User must have an email')
 
@@ -44,6 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 	username = models.CharField(max_length=100, unique=True)
 	email = models.EmailField(unique=True)
 	phone_number = models.CharField(max_length=50)
+	city = models.CharField(max_length=200, blank=True, null= True)
 
 	#required Fields
 	date_joined = models.DateTimeField(auto_now_add=True)

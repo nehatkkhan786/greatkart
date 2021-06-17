@@ -17,13 +17,13 @@ class StoreView(View):
 		if category_slug !=None:
 			categories = get_object_or_404(Category, slug=category_slug)
 			products = Product.objects.filter(category=categories, is_available=True)
-			paginator = Paginator(products, 1)
+			paginator = Paginator(products, 2)
 			page = request.GET.get('page')
 			product_in_page = paginator.get_page(page)
 			product_quantity = products.count()
 		else:
 			products = Product.objects.all().filter(is_available=True)
-			paginator = Paginator(products, 1)
+			paginator = Paginator(products, 2)
 			page = request.GET.get('page')
 			product_in_page = paginator.get_page(page)
 			product_quantity = products.count()
